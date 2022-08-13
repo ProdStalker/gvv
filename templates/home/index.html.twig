@@ -3,4 +3,7 @@
 {% block title %}Genève Ville Vivante{% endblock %}
 
 {% block body %}
+    <div class="container">
+        {{ component('projects', { isForHome: true }) }}
+    </div>
 {% endblock %}
