@@ -4,6 +4,7 @@
 
 {% block body %}
     <div class="container">
+        {{ component('header-title-subtitle', { title: 'Be GVV', subtitle: 'Une Genève qui rit, qui bouge, qui vit'}) }}
         {{ component('projects', { isForHome: true }) }}
     </div>
 {% endblock %}
