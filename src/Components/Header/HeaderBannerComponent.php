@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Components;
+namespace App\Components\Header;
 
 use Symfony\UX\TwigComponent\Attribute\AsTwigComponent;
 
-#[AsTwigComponent('header-banner', template: 'components/header/header-banner.html.twig')]
+#[AsTwigComponent(name: 'header-banner', template: 'components/header/header-banner.html.twig')]
 class HeaderBannerComponent
 {
     /**
