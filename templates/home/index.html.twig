@@ -3,8 +3,16 @@
 {% block title %}Genève Ville Vivante{% endblock %}
 
 {% block body %}
-    <div class="container">
-        {{ component('header-title-subtitle', { title: 'Be GVV', subtitle: 'Une Genève qui rit, qui bouge, qui vit'}) }}
-        {{ component('projects', { isForHome: true }) }}
+    <div class="home-projects-container">
+        <div class="container">
+            {{ component('header-title-subtitle', { title: 'Be GVV', subtitle: 'Une Genève qui rit, qui bouge, qui vit'}) }}
+            {{ component('projects', { isForHome: true }) }}
+        </div>
+
+    </div>
+    <div class="home-team-container">
+        <div class="container">
+            {{ component('header-title-subtitle', { title: 'La team', subtitle: 'Cerveaux en ébullitions'}) }}
+        </div>
     </div>
 {% endblock %}
