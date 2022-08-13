@@ -1,4 +1,5 @@
 @import "~bootstrap";
+@import "components/header/header-banner";
 
 html {
     position: relative;
@@ -23,7 +24,7 @@ body {
 -------------------------------------------------- */
 /* Not required for template or sticky footer method. */
 
-body > .container {
+body > .container-fluid {
     padding: 60px 15px 0;
 }
 
@@ -34,4 +35,9 @@ body > .container {
 
 code {
     font-size: 80%;
+}
+
+main
+{
+    margin-top: 55px;
 }

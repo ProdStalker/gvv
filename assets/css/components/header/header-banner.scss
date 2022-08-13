@@ -1,0 +1,29 @@
+.header-banner {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 300px;
+
+  &::before {
+    content: "";
+    position: absolute;
+    background: rgba(0,0,0,0.4);
+    height: 100%;
+    width: 100%;
+    left: 0;
+    top: 0;
+    z-index: 1;
+  }
+
+  .header-banner-title {
+    font-size: 3em;
+    color: #FFFFFF;
+    text-transform: uppercase;
+    font-weight: bold;
+    z-index: 2;
+  }
+}
