@@ -16,7 +16,7 @@ class HomeController extends AbstractController
             ->setImageUrl('https://geneve-ville-vivante.ch/img/banners/home.jpg');
 
         return $this->render('home/index.html.twig', [
-            'headerBanner' => $headerBanner,
+            'headerBanner' => $headerBanner
         ]);
     }
 }
