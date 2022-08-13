@@ -1,0 +1,14 @@
+<div class="projects">
+    <div class="row">
+        {% for project in computed.projects %}
+            <div class="col-12 col-md-3 mt-3">
+                {{ component('image-title-description', {
+                    title: project.name,
+                    color: '#' ~ project.color,
+                    description: project.shortDescription,
+                    imageUrl: 'https://geneve-ville-vivante.ch/img/projects/' ~ project.imageName })
+                }}
+            </div>
+        {% endfor %}
+    </div>
+</div>
