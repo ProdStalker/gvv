@@ -1,0 +1,29 @@
+.image-title-description {
+  padding: 10px;
+  text-align: center;
+
+  .image {
+    margin: auto;
+    border-radius: 50%;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    border: 5px solid rgb(234,234,234);
+    height: 150px;
+    width: 150px;
+
+    &:hover {
+      cursor: pointer;
+      border-color: var(--border-color-hover);
+    }
+  }
+
+  .title {
+    font-weight: bold;
+    margin-top: 5px;
+  }
+
+  .description {
+    margin-top: 10px;
+  }
+}
