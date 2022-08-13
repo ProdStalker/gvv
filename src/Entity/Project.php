@@ -8,6 +8,8 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
+use Gedmo\Mapping\Annotation as Gedmo;
+
 #[ORM\Entity(repositoryClass: ProjectRepository::class)]
 class Project
 {
@@ -29,13 +31,14 @@ class Project
     private ?string $color = null;
 
     #[ORM\Column(length: 255)]
+    #[Gedmo\Slug(fields: ['name'])]
     private ?string $slug = null;
 
     #[ORM\Column(length: 30, nullable: true)]
     private ?string $acronym = null;
 
     #[ORM\Column]
-    private ?bool $isShowTeam = null;
+    private bool $isShowTeam = false;
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $imageName = null;
@@ -47,13 +50,16 @@ class Project
     private ?\DateTimeInterface $updatedAt = null;
 
     #[ORM\Column]
-    private ?bool $isVisible = null;
+    private bool $isVisible = false;
 
     #[ORM\ManyToOne(targetEntity: self::class, inversedBy: 'projects')]
     private ?self $parent = null;
 
     #[ORM\OneToMany(mappedBy: 'parent', targetEntity: self::class)]
     private Collection $projects;
+
+    #[ORM\Column]
+    private bool $isShowHome = false;
 
     public function __construct()
     {
@@ -137,12 +143,12 @@ class Project
         return $this;
     }
 
-    public function isIsShowTeam(): ?bool
+    public function isShowTeam(): bool
     {
         return $this->isShowTeam;
     }
 
-    public function setIsShowTeam(bool $isShowTeam): self
+    public function setShowTeam(bool $isShowTeam): self
     {
         $this->isShowTeam = $isShowTeam;
 
@@ -185,12 +191,12 @@ class Project
         return $this;
     }
 
-    public function isIsVisible(): ?bool
+    public function isVisible(): bool
     {
         return $this->isVisible;
     }
 
-    public function setIsVisible(bool $isVisible): self
+    public function setVisible(bool $isVisible): self
     {
         $this->isVisible = $isVisible;
 
@@ -235,6 +241,18 @@ class Project
                 $project->setParent(null);
             }
         }
+
+        return $this;
+    }
+
+    public function isShowHome(): bool
+    {
+        return $this->isShowHome;
+    }
+
+    public function setShowHome(bool $isShowHome): self
+    {
+        $this->isShowHome = $isShowHome;
 
         return $this;
     }
