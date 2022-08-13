@@ -33,6 +33,9 @@ Intéressé par l’événementiel? La vie et la culture nocturne genevoise? Env
 La Team GVV
 ');
 
+        $projectGVV->setVisible(true);
+        $projectGVV->setShowHome(false);
+
 
         /*$repository = $manager->getRepository(Translation::class);
         $repository->translate($projectGVV, 'shortDescription', 'fr', 'Association mère')
@@ -64,6 +67,8 @@ Stands partenaires
         $projectSP->setColor('fc6d6d');
         $projectSP->setImageName('5e53fd7a9fc79049489377.jpg');
         $projectSP->setParent($projectGVV);
+        $projectSP->setVisible(true);
+        $projectSP->setShowHome(true);
 
         $projectGDJC = new Project();
         $projectGDJC->setName('Geneva DJ Contest');
@@ -72,6 +77,8 @@ Stands partenaires
         $projectGDJC->setColor('34d293');
         $projectGDJC->setImageName('5e53fd4225b6c435859056.jpg');
         $projectGDJC->setParent($projectGVV);
+        $projectGDJC->setVisible(true);
+        $projectGDJC->setShowHome(true);
 
         $projectZW = new Project();
         $projectZW->setName('Zombie Walk');
@@ -80,6 +87,8 @@ Stands partenaires
         $projectZW->setColor('3ab0e2');
         $projectZW->setImageName('5e53fd851ffc0366772287.jpg');
         $projectZW->setParent($projectGVV);
+        $projectZW->setVisible(false);
+        $projectZW->setShowHome(false);
 
         $projectGBPC = new Project();
         $projectGBPC->setName('Geneva Beer Pong Challenge');
@@ -119,6 +128,8 @@ INSCRIPTION
         $projectGBPC->setColor('f7d861');
         $projectGBPC->setImageName('5e53fd311efdf953834314.jpg');
         $projectGBPC->setParent($projectGVV);
+        $projectGBPC->setVisible(true);
+        $projectGBPC->setShowHome(true);
 
         $projectPC = new Project();
         $projectPC->setName('Pubcrawlers.ch');
@@ -129,6 +140,8 @@ INSCRIPTION
         $projectPC->setColor('e96656');
         $projectPC->setImageName('5e53fd70709f2022189142.jpg');
         $projectPC->setParent($projectGVV);
+        $projectPC->setVisible(true);
+        $projectPC->setShowHome(true);
 
         $projects[] = $projectGVV;
         $projects[] = $projectSP;
