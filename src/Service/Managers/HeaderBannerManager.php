@@ -25,7 +25,7 @@ class HeaderBannerManager
 
     public function findBySlug(string $slug): ?HeaderBanner
     {
-        $cacheName = sprintf('team-%s', $slug);
+        $cacheName = sprintf('header-banner-%s', $slug);
 
         return $this->cache->get($cacheName, function(ItemInterface $item) use ($slug) {
             $headerBanner = $this->getRepository()->findOneBySlug($slug);

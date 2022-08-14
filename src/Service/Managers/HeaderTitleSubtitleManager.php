@@ -25,7 +25,7 @@ class HeaderTitleSubtitleManager
 
     public function findBySlug(string $slug): ?HeaderTitleSubtitle
     {
-        $cacheName = sprintf('team-%s', $slug);
+        $cacheName = sprintf('header-title-subtitle-%s', $slug);
 
         return $this->cache->get($cacheName, function(ItemInterface $item) use ($slug) {
             $headerTitleSubtitle = $this->getRepository()->findOneBySlug($slug);
