@@ -50,10 +50,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?\DateTimeInterface $birthDate = null;
 
     #[ORM\Column]
-    private ?bool $isBanned = null;
+    private bool $isBanned = false;
 
     #[ORM\Column]
-    private ?bool $isActive = null;
+    private bool $isActive = false;
 
     #[ORM\Column]
     private ?\DateTimeImmutable $createdAt = null;
@@ -80,7 +80,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?string $passwordResetCode = null;
 
     #[ORM\Column]
-    private ?bool $isPublicProfile = null;
+    private bool $isPublicProfile = false;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $loggedAt = null;
@@ -294,7 +294,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function isBanned(): ?bool
+    public function isBanned(): bool
     {
         return $this->isBanned;
     }
@@ -306,7 +306,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function isActive(): ?bool
+    public function isActive(): bool
     {
         return $this->isActive;
     }
@@ -426,7 +426,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function isPublicProfile(): ?bool
+    public function isPublicProfile(): bool
     {
         return $this->isPublicProfile;
     }
