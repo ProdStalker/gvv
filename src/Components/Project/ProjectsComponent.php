@@ -2,40 +2,49 @@
 
 namespace App\Components\Project;
 
-use App\Repository\ProjectRepository;
+use App\Service\Managers\ProjectManager;
+use phpDocumentor\Reflection\Types\Collection;
 use Symfony\UX\TwigComponent\Attribute\AsTwigComponent;
 
 #[AsTwigComponent(name: 'projects', template: 'components/project/projects.html.twig')]
 class ProjectsComponent
 {
-    private ProjectRepository $projectRepository;
+    private ProjectManager $projectManager;
 
-    private $forHome;
+    private bool $forHome;
+    private bool $needShuffle;
 
     /**
-     * @param ProjectRepository $projectRepository
+     * @param ProjectManager $projectManager
      */
-    public function __construct(ProjectRepository $projectRepository)
+    public function __construct(ProjectManager $projectManager)
     {
-        $this->projectRepository = $projectRepository;
+        $this->projectManager = $projectManager;
     }
 
-    public function mount(bool $isForHome = false)
+    public function mount(bool $isNeedShuffle = true, bool $isForHome = false)
     {
+        $this->needShuffle = $isNeedShuffle;
         $this->forHome = $isForHome;
     }
 
     public function getProjects(): array
     {
+        $projects = [];
         if (!$this->forHome)
         {
-            return $this->projectRepository->findAll();
+            $projects = $this->projectManager->findAll();
         }
         else
         {
-            return $this->projectRepository->findBy([
-                'isShowHome' => true
-            ]);
+            $projects = $this->projectManager->findProjectsForHome();
         }
+
+        if ($this->needShuffle)
+        {
+            shuffle($projects);
+        }
+
+        return $projects;
     }
 }
