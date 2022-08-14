@@ -24,9 +24,21 @@ class ProjectManager
         $this->entityManager = $entityManager;
     }
 
-    public function findAll(): Collection
+    public function findAll(): array
     {
-        return $this->entityManager->findAll();
+        $cacheName = 'projects';
+        return $this->cache->get($cacheName, function(ItemInterface $item){
+            $projects = $this->getRepository()->findAll();
+
+            $item->expiresAfter(3600);
+
+            if (!$projects || empty($projects))
+            {
+                $item->expiresAfter(1);
+            }
+
+            return $projects;
+        });
     }
 
     public function findBySlug(string $slug): ?Project
