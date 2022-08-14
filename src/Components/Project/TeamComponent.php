@@ -3,8 +3,7 @@
 namespace App\Components\Project;
 
 use App\Entity\Team;
-use App\Repository\TeamRepository;
-use Symfony\Contracts\Cache\CacheInterface;
+use App\Service\Managers\TeamManager;
 use Symfony\Contracts\Cache\ItemInterface;
 use Symfony\UX\TwigComponent\Attribute\AsTwigComponent;
 
@@ -14,17 +13,14 @@ class TeamComponent
     public string $slug;
     private bool $shuffleMembers;
 
-    private TeamRepository $teamRepository;
-    private CacheInterface $cache;
+    private TeamManager $teamManager;
 
     /**
-     * @param TeamRepository $teamRepository
-     * @param CacheInterface $cache
+     * @param TeamManager $teamManager
      */
-    public function __construct(TeamRepository $teamRepository, CacheInterface $cache)
+    public function __construct(TeamManager $teamManager)
     {
-        $this->teamRepository = $teamRepository;
-        $this->cache = $cache;
+        $this->teamManager = $teamManager;
     }
 
     public function mount(bool $isShuffleMembers = true)
@@ -34,19 +30,7 @@ class TeamComponent
 
     public function getTeam(): ?Team
     {
-        $cacheName = sprintf('team-%s', $this->slug);
-
-        $team = $this->cache->get($cacheName, function(ItemInterface $item){
-            $team = $this->teamRepository->findBySlug($this->slug);
-
-            $item->expiresAfter(3600);
-            if (!$team)
-            {
-                $item->expiresAfter(1);
-            }
-
-            return $team;
-        });
+        $team = $this->teamManager->findBySlug($this->slug);
 
         if ($team && $this->shuffleMembers)
         {
