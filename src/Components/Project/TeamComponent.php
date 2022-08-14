@@ -9,7 +9,7 @@ use Symfony\UX\TwigComponent\Attribute\AsTwigComponent;
 #[AsTwigComponent(name: 'team', template: 'components/project/team.html.twig')]
 class TeamComponent
 {
-    public int $teamId;
+    public string $slug;
     private bool $shuffleMembers;
     private TeamRepository $teamRepository;
 
@@ -28,7 +28,10 @@ class TeamComponent
 
     public function getTeam(): ?Team
     {
-        $team = $this->teamRepository->find($this->teamId);
+        $team = $this->teamRepository->findOneBy([
+            'slug' => $this->slug
+        ]);
+
         if ($team && $this->shuffleMembers)
         {
            $team->shuffleMembers();
