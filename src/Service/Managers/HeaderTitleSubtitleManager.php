@@ -2,13 +2,13 @@
 
 namespace App\Service\Managers;
 
-use App\Entity\HeaderBanner;
-use App\Repository\HeaderBannerRepository;
+use App\Entity\HeaderTitleSubtitle;
+use App\Repository\HeaderTitleSubtitleRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Contracts\Cache\CacheInterface;
 use Symfony\Contracts\Cache\ItemInterface;
 
-class HeaderBannerManager
+class HeaderTitleSubtitleManager
 {
     private CacheInterface $cache;
     private EntityManagerInterface $entityManager;
@@ -23,25 +23,25 @@ class HeaderBannerManager
         $this->entityManager = $entityManager;
     }
 
-    public function findBySlug(string $slug): ?HeaderBanner
+    public function findBySlug(string $slug): ?HeaderTitleSubtitle
     {
-        $cacheName = sprintf('header-banner-%s', $slug);
+        $cacheName = sprintf('header-title-subtitle-%s', $slug);
 
         return $this->cache->get($cacheName, function(ItemInterface $item) use ($slug) {
-            $headerBanner = $this->getRepository()->findOneBySlug($slug);
+            $headerTitleSubtitle = $this->getRepository()->findOneBySlug($slug);
 
             $item->expiresAfter(3600);
-            if (!$headerBanner)
+            if (!$headerTitleSubtitle)
             {
                 $item->expiresAfter(1);
             }
 
-            return $headerBanner;
+            return $headerTitleSubtitle;
         });
     }
 
-    private function getRepository(): HeaderBannerRepository
+    private function getRepository(): HeaderTitleSubtitleRepository
     {
-        return $this->entityManager->getRepository(HeaderBanner::class);
+        return $this->entityManager->getRepository(HeaderTitleSubtitle::class);
     }
 }

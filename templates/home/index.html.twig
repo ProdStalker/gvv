@@ -5,14 +5,14 @@
 {% block body %}
     <div class="home-projects-container">
         <div class="container">
-            {{ component('header-title-subtitle', { title: 'Be GVV', subtitle: 'Une Genève qui rit, qui bouge, qui vit'}) }}
+            {{ component('header-title-subtitle', { slug: 'be-gvv'}) }}
             {{ component('projects', { isForHome: true }) }}
         </div>
 
     </div>
     <div class="home-team-container">
         <div class="container">
-            {{ component('header-title-subtitle', { title: 'La team', subtitle: 'Cerveaux en ébullitions'}) }}
+            {{ component('header-title-subtitle',  { slug: 'home-la-team'}) }}
             {{ component('team', { slug: 'geneve-ville-vivante'} ) }}
         </div>
     </div>
