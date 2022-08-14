@@ -453,4 +453,32 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
+
+    #[ORM\PrePersist]
+    public function persistSomeValues()
+    {
+        $this->setCreatedAtValue();
+    }
+
+    public function setCreatedAtValue()
+    {
+        $this->createdAt = new \DateTimeImmutable();
+    }
+
+    #[ORM\PreUpdate]
+    public function updateSomeValues()
+    {
+        $this->setUpdatedAtValue();
+    }
+
+    public function setUpdatedAtValue()
+    {
+        $this->updatedAt = new \DateTime();
+    }
+
+    public function getAge()
+    {
+        $now = new \DateTime();
+        return $now->diff($this->getBirthDate(), true)->y;
+    }
 }
