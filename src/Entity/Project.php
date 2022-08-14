@@ -61,9 +61,16 @@ class Project
     #[ORM\Column]
     private bool $isShowHome = false;
 
+    #[ORM\OneToOne(mappedBy: 'project', cascade: ['persist', 'remove'])]
+    private ?Team $team = null;
+
+    #[ORM\ManyToMany(targetEntity: User::class, mappedBy: 'projects')]
+    private Collection $managers;
+
     public function __construct()
     {
         $this->projects = new ArrayCollection();
+        $this->managers = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -253,6 +260,50 @@ class Project
     public function setShowHome(bool $isShowHome): self
     {
         $this->isShowHome = $isShowHome;
+
+        return $this;
+    }
+
+    public function getTeam(): ?Team
+    {
+        return $this->team;
+    }
+
+    public function setTeam(Team $team): self
+    {
+        // set the owning side of the relation if necessary
+        if ($team->getProject() !== $this) {
+            $team->setProject($this);
+        }
+
+        $this->team = $team;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, User>
+     */
+    public function getManagers(): Collection
+    {
+        return $this->managers;
+    }
+
+    public function addManager(User $manager): self
+    {
+        if (!$this->managers->contains($manager)) {
+            $this->managers->add($manager);
+            $manager->addProject($this);
+        }
+
+        return $this;
+    }
+
+    public function removeManager(User $manager): self
+    {
+        if ($this->managers->removeElement($manager)) {
+            $manager->removeProject($this);
+        }
 
         return $this;
     }
