@@ -177,4 +177,18 @@ class Team
 
         return $this;
     }
+
+    public function setTeamMembers(Collection $teamMembers)
+    {
+        $this->teamMembers = $teamMembers;
+    }
+
+    public function shuffleMembers(): self
+    {
+        $teamMembers = $this->teamMembers->toArray();
+        shuffle($teamMembers);
+        $this->setTeamMembers(new ArrayCollection($teamMembers));
+
+        return $this;
+    }
 }

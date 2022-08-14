@@ -1,0 +1,19 @@
+{% set roleNames = '' %}
+{% for role in teamMember.roles %}
+    {% if teamMember.roles|length > 1 %}
+        {% if role.name != 'Membre comité' and role.name != 'Membre' %}
+            {% set roleNames = roleNames ~ ' | ' ~ role.name %}
+        {% endif %}
+    {% else %}
+        {% set roleNames = roleNames ~ ' | ' ~ role.name %}
+    {% endif %}
+{% endfor %}
+
+<div class="team-member">
+    {{ component('image-title-description', {
+        title: teamMember.user.nickname ? teamMember.user.nickname : teamMember.user.firstName,
+        color: '#' ~ teamMember.team.project.color,
+        description: roleNames|trim(' | '),
+        imageUrl: 'https://geneve-ville-vivante.ch/img/members/' ~ teamMember.user.imageName })
+    }}
+</div>

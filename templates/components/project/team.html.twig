@@ -1,0 +1,11 @@
+<div class="team">
+    {% if computed.team is not null %}
+        <div class="row">
+            {% for teamMember in computed.team.teamMembers %}
+                <div class="col-12 col-md-3">
+                    {{ component('team-member', { teamMember: teamMember} ) }}
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+</div>
