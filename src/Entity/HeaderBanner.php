@@ -19,6 +19,9 @@ class HeaderBanner
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $imageUrl = null;
 
+    #[ORM\Column(length: 255)]
+    private ?string $slug = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -44,6 +47,18 @@ class HeaderBanner
     public function setImageUrl(?string $imageUrl): self
     {
         $this->imageUrl = $imageUrl;
+
+        return $this;
+    }
+
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(string $slug): self
+    {
+        $this->slug = $slug;
 
         return $this;
     }
