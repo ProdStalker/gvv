@@ -61,11 +61,11 @@ class Project
     #[ORM\Column]
     private bool $isShowHome = false;
 
-    #[ORM\OneToOne(mappedBy: 'project', cascade: ['persist', 'remove'])]
-    private ?Team $team = null;
-
     #[ORM\ManyToMany(targetEntity: User::class, mappedBy: 'projects')]
     private Collection $managers;
+
+    #[ORM\OneToOne(inversedBy: 'project', cascade: ['persist', 'remove'])]
+    private ?Team $team = null;
 
     public function __construct()
     {
@@ -264,23 +264,6 @@ class Project
         return $this;
     }
 
-    public function getTeam(): ?Team
-    {
-        return $this->team;
-    }
-
-    public function setTeam(Team $team): self
-    {
-        // set the owning side of the relation if necessary
-        if ($team->getProject() !== $this) {
-            $team->setProject($this);
-        }
-
-        $this->team = $team;
-
-        return $this;
-    }
-
     /**
      * @return Collection<int, User>
      */
@@ -304,6 +287,18 @@ class Project
         if ($this->managers->removeElement($manager)) {
             $manager->removeProject($this);
         }
+
+        return $this;
+    }
+
+    public function getTeam(): ?Team
+    {
+        return $this->team;
+    }
+
+    public function setTeam(?Team $team): self
+    {
+        $this->team = $team;
 
         return $this;
     }

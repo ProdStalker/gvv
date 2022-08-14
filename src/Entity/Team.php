@@ -34,8 +34,7 @@ class Team
     #[ORM\OneToMany(mappedBy: 'team', targetEntity: TeamMember::class, orphanRemoval: true)]
     private Collection $teamMembers;
 
-    #[ORM\OneToOne(inversedBy: 'team', cascade: ['persist', 'remove'])]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\OneToOne(mappedBy: 'team', cascade: ['persist', 'remove'])]
     private ?Project $project = null;
 
     public function __construct()
@@ -162,8 +161,18 @@ class Team
         return $this->project;
     }
 
-    public function setProject(Project $project): self
+    public function setProject(?Project $project): self
     {
+        // unset the owning side of the relation if necessary
+        if ($project === null && $this->project !== null) {
+            $this->project->setTeam(null);
+        }
+
+        // set the owning side of the relation if necessary
+        if ($project !== null && $project->getTeam() !== $this) {
+            $project->setTeam($this);
+        }
+
         $this->project = $project;
 
         return $this;
