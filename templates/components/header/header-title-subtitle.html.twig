@@ -1,6 +1,8 @@
-<div class="header-title-subtitle">
-    <h2 class="title">{{ title }}</h2>
-    <div class="subtitle">
-        {{ subtitle }}
+{% if computed.headerTitleSubtitle is not null %}
+    <div class="header-title-subtitle">
+        <h2 class="title">{{ computed.headerTitleSubtitle.title }}</h2>
+        <div class="subtitle">
+            {{ computed.headerTitleSubtitle.subtitle }}
+        </div>
     </div>
-</div>
+{% endif %}
