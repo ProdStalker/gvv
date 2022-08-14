@@ -9,6 +9,7 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
@@ -36,6 +37,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private Collection $teamMembers;
 
     #[ORM\Column(length: 255)]
+    #[Gedmo\Slug(fields: ['username'])]
     private ?string $slug = null;
 
     #[ORM\Column(length: 100)]
