@@ -2,13 +2,14 @@
 
 namespace App\Service\Managers;
 
-use App\Entity\Team;
-use App\Repository\TeamRepository;
+use App\Entity\Project;
+use App\Repository\ProjectRepository;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Contracts\Cache\CacheInterface;
 use Symfony\Contracts\Cache\ItemInterface;
 
-class TeamManager
+class ProjectManager
 {
     private CacheInterface $cache;
     private EntityManagerInterface $entityManager;
@@ -23,7 +24,12 @@ class TeamManager
         $this->entityManager = $entityManager;
     }
 
-    public function findBySlug(string $slug): ?Team
+    public function findAll(): Collection
+    {
+        return $this->entityManager->findAll();
+    }
+
+    public function findBySlug(string $slug): ?Project
     {
         $cacheName = sprintf('project-%s', $slug);
 
@@ -40,8 +46,8 @@ class TeamManager
         });
     }
 
-    private function getRepository(): TeamRepository
+    private function getRepository(): ProjectRepository
     {
-        return $this->entityManager->getRepository(Team::class);
+        return $this->entityManager->getRepository(Project::class);
     }
 }
