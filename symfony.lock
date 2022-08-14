@@ -471,6 +471,9 @@
             "./templates/base.html.twig"
         ]
     },
+    "symfony/ux-lazy-image": {
+        "version": "v2.3.0"
+    },
     "symfony/ux-live-component": {
         "version": "2.3",
         "recipe": {
