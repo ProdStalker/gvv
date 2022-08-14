@@ -27,7 +27,7 @@ class TeamMember
     private ?\DateTimeInterface $endedAt = null;
 
     #[ORM\ManyToOne(inversedBy: 'teamMembers')]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(nullable: true)]
     private ?Team $team = null;
 
     #[ORM\ManyToMany(targetEntity: TeamRole::class, mappedBy: 'teamMembers')]
@@ -99,7 +99,7 @@ class TeamMember
         return $this->roles;
     }
 
-    public function addTeamRole(TeamRole $teamRole): self
+    public function addRole(TeamRole $teamRole): self
     {
         if (!$this->roles->contains($teamRole)) {
             $this->roles->add($teamRole);
@@ -109,7 +109,7 @@ class TeamMember
         return $this;
     }
 
-    public function removeTeamRole(TeamRole $teamRole): self
+    public function removeRole(TeamRole $teamRole): self
     {
         if ($this->roles->removeElement($teamRole)) {
             $teamRole->removeTeamMember($this);
