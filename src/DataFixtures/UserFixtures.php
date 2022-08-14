@@ -54,7 +54,7 @@ class UserFixtures extends BaseFixtures
         $steve->setPhone('+41766034207');
         $steve->setUsername('Steve');
         $steve->setRoles(array('ROLE_SUPER_ADMIN', 'ROLE_DIRECTOR'));
-        $steve->setImageName('https://geneve-ville-vivante.ch/wp-content/uploads/2018/09/steve_silent-e1551284094485-288x300.jpg');
+        $steve->setImageName('steve_silent-e1551284094485-288x300.jpg');
 
         $alex = new User();
         $alex->setName('Barclay');
@@ -72,7 +72,7 @@ class UserFixtures extends BaseFixtures
         $alex->setPhone('+41788682342');
         $alex->setUsername('Alex');
         $alex->setRoles(array('ROLE_PRESIDENT'));
-        $alex->setImageName('https://geneve-ville-vivante.ch/wp-content/uploads/2015/10/IMG_3590.jpg');
+        $alex->setImageName('IMG_3590.jpg');
         $alex->setNickName('Alex');
 
         $tim = new User();
@@ -91,7 +91,7 @@ class UserFixtures extends BaseFixtures
         $tim->setPhone('+41766164444');
         $tim->setUsername('Tim');
         $tim->setRoles(array('ROLE_PRESIDENT'));
-        $tim->setImageName('https://geneve-ville-vivante.ch/wp-content/uploads/2015/08/Tim-e1440431497152.jpg');
+        $tim->setImageName('Tim-e1440431497152.jpg');
        // $tim->setNickName('El Director');
 
         $loris = new User();
@@ -110,7 +110,7 @@ class UserFixtures extends BaseFixtures
         $loris->setPhone('+41765403288');
         $loris->setUsername('Loris');
         $loris->setRoles(array('ROLE_MEMBER'));
-        $loris->setImageName('https://geneve-ville-vivante.ch/wp-content/uploads/2015/09/IMG_3390-e1441291694915.jpg');
+        $loris->setImageName('IMG_3390-e1441291694915.jpg');
 
         $mickael = new User();
         $mickael->setName('Blanco');
@@ -145,7 +145,7 @@ class UserFixtures extends BaseFixtures
         $lola->setPhone('+41793570229');
         $lola->setUsername('Lola');
         $lola->setRoles(array('ROLE_GUIDE','ROLE_MEMBER'));
-        $lola->setImageName('https://geneve-ville-vivante.ch/wp-content/uploads/2018/04/lola-150x150.jpg');
+        $lola->setImageName('lola-150x150.jpg');
 
         $ben = new User();
         $ben->setName('Eugster');
@@ -163,7 +163,7 @@ class UserFixtures extends BaseFixtures
         $ben->setPhone('+41794774020');
         $ben->setUsername('Ben');
         $ben->setRoles(array('ROLE_MANAGER_BAR'));
-        $ben->setImageName('https://geneve-ville-vivante.ch/wp-content/uploads/2018/09/Ben-150x150.jpg');
+        $ben->setImageName('Ben-150x150.jpg');
         $ben->setNickName('Ben');
 
         $nicos = new User();
@@ -182,7 +182,7 @@ class UserFixtures extends BaseFixtures
         $nicos->setPhone('+41765797786');
         $nicos->setUsername('Nicos');
         $nicos->setRoles(array('ROLE_MANAGER_BAR'));
-        $nicos->setImageName('https://geneve-ville-vivante.ch/wp-content/uploads/2018/09/nicos-150x150.jpg');
+        $nicos->setImageName('nicos-150x150.jpg');
         $nicos->setNickName('Nicos');
 
         $benji = new User();
@@ -201,7 +201,7 @@ class UserFixtures extends BaseFixtures
         $benji->setPhone('+41794774020');
         $benji->setUsername('Benji');
         $benji->setRoles(array('ROLE_MANAGER_TECHNIC'));
-        $benji->setImageName('https://geneve-ville-vivante.ch/wp-content/uploads/2017/10/benji.jpg');
+        $benji->setImageName('benji.jpg');
         $benji->setNickName('Benji');
 
         $steven = new User();
@@ -220,7 +220,7 @@ class UserFixtures extends BaseFixtures
         $steven->setPhone('+33612833390');
         $steven->setUsername('Steven');
         $steven->setRoles(array('ROLE_MANAGER_TECHNIC'));
-        $steven->setImageName('https://geneve-ville-vivante.ch/wp-content/uploads/2017/10/steven-e1508851185583.jpg');
+        $steven->setImageName('steven-e1508851185583.jpg');
 
         $jorge = new User();
         $jorge->setName('Cipriano');
@@ -238,7 +238,7 @@ class UserFixtures extends BaseFixtures
         $jorge->setPhone('+41786443574');
         $jorge->setUsername('Jorge');
         $jorge->setRoles(array('ROLE_MEMBER'));
-        $jorge->setImageName('https://geneve-ville-vivante.ch/wp-content/uploads/2019/02/jorge-1-e1551450198288-300x255.jpg');
+        $jorge->setImageName('jorge-1-e1551450198288-300x255.jpg');
 
         $lena = new User();
         $lena->setName('Debonneville');
@@ -256,7 +256,7 @@ class UserFixtures extends BaseFixtures
         $lena->setPhone('+41787045835');
         $lena->setUsername('Lena');
         $lena->setRoles(array('ROLE_MANAGER_VOLUNTEERS','ROLE_MANAGER_HEADSET'));
-        $lena->setImageName('https://geneve-ville-vivante.ch/wp-content/uploads/2019/02/lena-e1551283671838-275x300.jpeg');
+        $lena->setImageName('lena-e1551283671838-275x300.jpeg');
 
         $tidjan = new User();
         $tidjan->setName('Radi');
@@ -274,7 +274,7 @@ class UserFixtures extends BaseFixtures
         $tidjan->setPhone('+41766938563');
         $tidjan->setUsername('Tidjan');
         $tidjan->setRoles(array('ROLE_MEMBER'));
-        //$tidjan->setImageName('https://geneve-ville-vivante.ch/wp-content/uploads/2019/02/tidjan-e1551283671838-275x300.jpeg');
+        $tidjan->setImageName('tidjan-square.png');
 
         
 
