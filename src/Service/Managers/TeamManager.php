@@ -8,7 +8,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Contracts\Cache\CacheInterface;
 use Symfony\Contracts\Cache\ItemInterface;
 
-class TeamManager
+class TeamManager extends BaseManager
 {
     private CacheInterface $cache;
     private EntityManagerInterface $entityManager;
@@ -16,9 +16,12 @@ class TeamManager
     /**
      * @param CacheInterface $cache
      * @param EntityManagerInterface $entityManager
+     * @param int $cacheDuration
      */
-    public function __construct(CacheInterface $cache, EntityManagerInterface $entityManager)
+    public function __construct(CacheInterface $cache, EntityManagerInterface $entityManager, int $cacheDuration)
     {
+        parent::__construct($cacheDuration);
+
         $this->cache = $cache;
         $this->entityManager = $entityManager;
     }
@@ -30,7 +33,7 @@ class TeamManager
         return $this->cache->get($cacheName, function(ItemInterface $item) use ($slug) {
             $team = $this->getRepository()->findBySlug($slug);
 
-            $item->expiresAfter(3600);
+            $item->expiresAfter($this->cacheDuration);
             if (!$team)
             {
                 $item->expiresAfter(1);

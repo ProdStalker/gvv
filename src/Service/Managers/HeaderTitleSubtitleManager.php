@@ -8,7 +8,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Contracts\Cache\CacheInterface;
 use Symfony\Contracts\Cache\ItemInterface;
 
-class HeaderTitleSubtitleManager
+class HeaderTitleSubtitleManager extends BaseManager
 {
     private CacheInterface $cache;
     private EntityManagerInterface $entityManager;
@@ -16,9 +16,12 @@ class HeaderTitleSubtitleManager
     /**
      * @param CacheInterface $cache
      * @param EntityManagerInterface $entityManager
+     * @param int $cacheDuration
      */
-    public function __construct(CacheInterface $cache, EntityManagerInterface $entityManager)
+    public function __construct(CacheInterface $cache, EntityManagerInterface $entityManager, int $cacheDuration)
     {
+        parent::__construct($cacheDuration);
+
         $this->cache = $cache;
         $this->entityManager = $entityManager;
     }
@@ -30,7 +33,7 @@ class HeaderTitleSubtitleManager
         return $this->cache->get($cacheName, function(ItemInterface $item) use ($slug) {
             $headerTitleSubtitle = $this->getRepository()->findOneBySlug($slug);
 
-            $item->expiresAfter(3600);
+            $item->expiresAfter($this->cacheDuration);
             if (!$headerTitleSubtitle)
             {
                 $item->expiresAfter(1);

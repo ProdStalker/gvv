@@ -9,7 +9,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Contracts\Cache\CacheInterface;
 use Symfony\Contracts\Cache\ItemInterface;
 
-class ProjectManager
+class ProjectManager extends BaseManager
 {
     private CacheInterface $cache;
     private EntityManagerInterface $entityManager;
@@ -17,9 +17,12 @@ class ProjectManager
     /**
      * @param CacheInterface $cache
      * @param EntityManagerInterface $entityManager
+     * @param int $cacheDuration
      */
-    public function __construct(CacheInterface $cache, EntityManagerInterface $entityManager)
+    public function __construct(CacheInterface $cache, EntityManagerInterface $entityManager, int $cacheDuration)
     {
+        parent::__construct($cacheDuration);
+
         $this->cache = $cache;
         $this->entityManager = $entityManager;
     }
@@ -30,7 +33,7 @@ class ProjectManager
         return $this->cache->get($cacheName, function(ItemInterface $item){
             $projects = $this->getRepository()->findAll();
 
-            $item->expiresAfter(3600);
+            $item->expiresAfter($this->cacheDuration);
 
             if (!$projects || empty($projects))
             {
@@ -48,7 +51,7 @@ class ProjectManager
         return $this->cache->get($cacheName, function(ItemInterface $item) use ($slug) {
             $project = $this->getRepository()->findBySlug($slug);
 
-            $item->expiresAfter(3600);
+            $item->expiresAfter($this->cacheDuration);
             if (!$project)
             {
                 $item->expiresAfter(1);
@@ -66,7 +69,7 @@ class ProjectManager
                 'isShowHome' => true
             ]);;
 
-            $item->expiresAfter(3600);
+            $item->expiresAfter($this->cacheDuration);
 
             if (!$projects || empty($projects))
             {
