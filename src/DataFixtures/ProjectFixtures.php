@@ -3,14 +3,30 @@
 namespace App\DataFixtures;
 
 use App\Entity\Project;
-use Doctrine\Bundle\FixturesBundle\Fixture;
+use App\Entity\Team;
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
 
-class ProjectFixtures extends Fixture
+class ProjectFixtures extends BaseFixtures implements DependentFixtureInterface
 {
-    public function load(ObjectManager $manager): void
+    /**
+     * @inheritDoc
+     */
+    public function getDependencies()
     {
+        return array(
+            TeamFixtures::class,
+        );
+    }
+
+    /**
+     * @inheritDoc
+     */
+    protected function loadData(ObjectManager $manager)
+    {
+        $teamRepository = $manager->getRepository(Team::class);
+
         $projects = new ArrayCollection();
 
         $projectGVV = new Project();
@@ -156,10 +172,10 @@ INSCRIPTION
             $projects[$key]->setDescription(trim($project->getDescription()));
         }
 
-       /* foreach ($projects as $project) {
-            $tmpTeam = $teamRepository->findOneBy(array('name' => $project->getName()));
-            $project->setTeam($tmpTeam);
-        }*/
+         foreach ($projects as $project) {
+             $tmpTeam = $teamRepository->findOneBy(array('name' => $project->getName()));
+             $project->setTeam($tmpTeam);
+         }
 
         $manager->persist($projectGVV);
         $manager->persist($projectSP);
