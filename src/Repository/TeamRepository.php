@@ -39,28 +39,19 @@ class TeamRepository extends ServiceEntityRepository
         }
     }
 
-//    /**
-//     * @return Team[] Returns an array of Team objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('t')
-//            ->andWhere('t.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('t.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
-
-//    public function findOneBySomeField($value): ?Team
-//    {
-//        return $this->createQueryBuilder('t')
-//            ->andWhere('t.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
+    public function findBySlug(string $slug)
+    {
+        return $this->createQueryBuilder('t')
+            ->addSelect('t')
+            ->innerJoin('t.teamMembers', 'tm')
+                ->addSelect('tm')
+            ->innerJoin('tm.user', 'tmu')
+                ->addSelect('tmu')
+            ->innerJoin('tm.roles', 'tmr')
+                ->addSelect('tmr')
+            ->where('t.slug = :slug')
+                ->setParameter('slug', $slug)
+            ->getQuery()
+            ->getOneOrNullResult();
+    }
 }
