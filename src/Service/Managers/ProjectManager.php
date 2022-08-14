@@ -58,8 +58,28 @@ class ProjectManager
         });
     }
 
+    public function findProjectsForHome(): array
+    {
+        $cacheName = 'projects-for-home';
+        return $this->cache->get($cacheName, function(ItemInterface $item){
+            $projects = $this->getRepository()->findBy([
+                'isShowHome' => true
+            ]);;
+
+            $item->expiresAfter(3600);
+
+            if (!$projects || empty($projects))
+            {
+                $item->expiresAfter(1);
+            }
+
+            return $projects;
+        });
+    }
+
     private function getRepository(): ProjectRepository
     {
+
         return $this->entityManager->getRepository(Project::class);
     }
 }
